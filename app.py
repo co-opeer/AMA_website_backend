@@ -27,6 +27,7 @@ def upload_file():
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
             result = predict_car(file_path)
+            os.remove(file_path)
             return render_template('result.html', result='Car' if result else 'No Car')
 @app.route('/home')
 def home():
