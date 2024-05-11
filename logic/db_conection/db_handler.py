@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 class MySQLDatabase:
     def __init__(self, host, username, password, database):
         self.host = host
@@ -23,11 +24,18 @@ class MySQLDatabase:
             self.connection.close()
             print("Disconnected from MySQL database")
 
+    def execute_query(self, query):
+        cursor = self.connection.cursor()
+        cursor.execute(query)
+        self.connection.commit()
+        cursor.close()
+
     def fetch_data(self, query):
         cursor = self.connection.cursor()
         cursor.execute(query)
         records = cursor.fetchall()
         cursor.close()
         return records
+
 
 

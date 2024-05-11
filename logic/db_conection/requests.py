@@ -16,12 +16,19 @@ database = config_data['database']
 db = MySQLDatabase(host, username, password, database)
 
 
-def get():
+def get_urls_emails():
     db.connect()
-    query = "SELECT url,email FROM Requests WHERE status = 'requested'"
+    query = "SELECT url,email,id FROM Requests WHERE status = 'requested'"
     data = db.fetch_data(query)
     db.disconnect()
     return data
 
+def set_status_result(id, status, result):
+    db.connect()
+    query = "UPDATE Requests SET status = '{}', result = '{}' WHERE id = {};".format(status, result, id)
+    print(query)
+    data = db.execute_query(query)
+    db.disconnect()
+    return data
 
 
