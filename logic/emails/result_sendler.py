@@ -6,7 +6,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-def send_email(sender_email, app_password, receiver_email, subject, message):
+def send(sender_email, app_password, receiver_email, subject, message):
     # Check if Less Secure Apps is enabled (recommended alternative: use SendGrid)
     # ... (consider adding a check and warning if Less Secure Apps is enabled)
 
@@ -30,20 +30,17 @@ def send_email(sender_email, app_password, receiver_email, subject, message):
     # Close connection
     smtp_server.quit()
 
-# ... (sender and receiver email addresses, subject, and message)
-
-# Use App Password instead of regular password
 
 
 
-# Параметри електронного листа
-sender_email = "ama.opticore@gmail.com"
-sender_password = "amaopticore1704"
-receiver_email = "diachuk.mykola2005@gmail.com"
-subject = "Тема листа"
-message = "Текст повідомлення"
-app_password= "zauy fstk dsyp feel"
 
-# Надсилаємо лист
+def send_email(receiver_email, url, result):
+    sender_email = "ama.opticore@gmail.com"
+    subject = "Результат для зображення"
+    app_password = "pzsp svfl kvdd dzpv"
+    message = f"Зображнння: {url}, \n Результат: {result}"
 
-send_email(sender_email, app_password, receiver_email, subject, message)
+    send(sender_email, app_password, receiver_email, subject, message)
+
+
+

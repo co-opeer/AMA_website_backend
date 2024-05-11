@@ -1,9 +1,11 @@
 # Параметри для підключення до бази даних MySQL
-from db_conection.db_handler import MySQLDatabase
-import json
+import os
 
+from logic.db_conection.db_handler import MySQLDatabase
+import json
+json_file_path = os.path.join(os.path.dirname(__file__), 'db_const.json')
 # Відкриття файлу JSON
-with open('db_const.json') as json_file:
+with open(json_file_path) as json_file:
     config_data = json.load(json_file)
 
 # Отримання даних з файлу JSON
@@ -11,17 +13,15 @@ host = config_data['host']
 username = config_data['username']
 password = config_data['password']
 database = config_data['database']
-
-
 db = MySQLDatabase(host, username, password, database)
-db.connect()
 
 
-query = "SELECT * FROM Requests WHERE status = 'requested'"
-data = db.fetch_data(query)
-print("Data from MySQL database:")
-for record in data:
-    print(record)
+def get():
+    db.connect()
+    query = "SELECT url,email FROM Requests WHERE status = 'requested'"
+    data = db.fetch_data(query)
+    db.disconnect()
+    return data
 
 
-db.disconnect()
+

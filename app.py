@@ -1,38 +1,35 @@
 import os
 
-import requests
-from flask import Flask, request, render_template, redirect, url_for
-from werkzeug.utils import secure_filename
-
-from templates.test_on_dataset import test_model, predict_car
+from flask import Flask, request
+from logic.db_conection.requests import get
+from logic.emails.result_sendler import send_email
+from logic.google_drive.download import download_photo
+from templates.test_on_dataset import predict_car
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-@app.route('/upload', methods=['POST'])
+
+
+
+
+@app.route('/', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
-        if 'file' not in request.files:
-            return 'No file part'
+        data = get()
+        urls = [row[0] for row in data]
+        emails = [row[1] for row in data]
+        for url, email in zip(urls, emails):
+            download_photo(url)
+            result = predict_car(os.path.join('templates','uploads', 'photo.jpg'))
+            send_email(email, url, result)
+            os.remove('templates/uploads/photo.jpg')
 
-        file = request.files['file']
-        if file.filename == '':
-            return 'No selected file'
+        return True
 
-        if file:
-            filename = secure_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
-            result = predict_car(file_path)
-            os.remove(file_path)
-            return render_template('result.html', result='Car' if result else 'No Car')
-@app.route('/home')
-def home():
-    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run()
+
+
+
 
