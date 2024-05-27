@@ -23,12 +23,17 @@ def get_urls_emails():
     db.disconnect()
     return data
 
-def set_status_result(id, status, result):
+def set_status_result(url, email, status, result):
     db.connect()
-    query = "UPDATE Requests SET status = '{}', result = '{}' WHERE id = {};".format(status, result, id)
-    print(query)
+    query = "UPDATE Requests SET status = '{}', result = '{}' WHERE url = '{}' AND email = '{}';".format(status, result, url, email)
     data = db.execute_query(query)
     db.disconnect()
     return data
 
 
+def add_record(url, email):
+    db.connect()
+    query = "INSERT INTO Requests (url, email) VALUES ('{}', '{}')".format(url, email)
+    data = db.execute_query(query)
+    db.disconnect()
+    return data
