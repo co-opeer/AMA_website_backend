@@ -2,17 +2,13 @@
 import os
 
 from logic.db_conection.db_handler import MySQLDatabase
-import json
-json_file_path = os.path.join(os.path.dirname(__file__), 'db_const.json')
-# Відкриття файлу JSON
-with open(json_file_path) as json_file:
-    config_data = json.load(json_file)
+
 
 # Отримання даних з файлу JSON
-host = config_data['host']
-username = config_data['username']
-password = config_data['password']
-database = config_data['database']
+host = os.getenv('DB_HOST')
+username = os.getenv('DB_USERNAME')
+password = os.getenv('DB_PASSWORD')
+database = os.getenv('DB_DATABASE')
 db = MySQLDatabase(host, username, password, database)
 
 
