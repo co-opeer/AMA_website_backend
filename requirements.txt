@@ -1,7 +1,8 @@
+Flask==3.0.3
 Flask_Cors==4.0.1
 googledrivedownloader==0.4
 keras_tuner==1.4.7
 mysql_connector_repackaged==0.3.1
-tensorflow==2.16.1
-
+python-dotenv==1.0.1
+tensorflow>=2.16.1
 

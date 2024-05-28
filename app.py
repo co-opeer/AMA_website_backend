@@ -8,7 +8,8 @@ from templates.test_on_dataset import predict_car
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app)
+
 
 '''def upload_file():
     data = get_urls_emails()
