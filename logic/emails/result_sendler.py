@@ -29,6 +29,7 @@ def send(sender_email, app_password, receiver_email, subject, message):
 
     # Close connection
     smtp_server.quit()
+    print("Email sent successfully!")
 
 
 

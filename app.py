@@ -53,7 +53,9 @@ def predict():
     result = predict_car(os.path.join('templates', 'uploads', 'photo.jpg'))
     send_email(email, url, result)
     os.remove('templates/uploads/photo.jpg')
+    print('photo deleted')
     set_status_result(url, email, 'done', result)
+    print('record updated')
 
     return jsonify({'message': 'Record added successfully'}), 201
 

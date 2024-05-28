@@ -38,6 +38,7 @@ def set_status_result(url, email, status, result):
     query = "UPDATE Requests SET status = '{}', result = '{}' WHERE url = '{}' AND email = '{}';".format(status, result, url, email)
     data = db.execute_query(query)
     db.disconnect()
+    print("Data updated successfully")
     return data
 
 
