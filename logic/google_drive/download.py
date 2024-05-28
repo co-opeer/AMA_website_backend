@@ -24,7 +24,8 @@ def download_photo(url):
         print("Error: Could not extract file ID from the URL.")
         return False
 
-    dest_path = r'C:\Users\PC\PycharmProjects\AMA_website_car_appearance\templates\uploads\photo.jpg'
+    dest_path = os.path.join('templates', 'uploads', 'photo.jpg')
+
     try:
         gdd.download_file_from_google_drive(file_id=file_id, dest_path=dest_path, overwrite=True)
         if os.path.exists(dest_path) and os.path.getsize(dest_path) > 0:
