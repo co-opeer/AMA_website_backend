@@ -29,7 +29,9 @@ def download_photo(url):
     dest_path = os.path.join('templates', 'uploads', 'photo.jpg')
 
     try:
+        print('before download')
         gdd.download_file_from_google_drive(file_id=file_id, dest_path=dest_path, overwrite=True)
+        print('after download')
         if os.path.exists(dest_path) and os.path.getsize(dest_path) > 0:
             print(f"File downloaded successfully to {dest_path}")
             return True
