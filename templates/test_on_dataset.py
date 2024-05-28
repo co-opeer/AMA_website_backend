@@ -17,6 +17,7 @@ model = keras.models.load_model(model_path)
 
 
 def predict_car(image_path):
+    print("try to predict car")
 
     img = tf.keras.preprocessing.image.load_img(image_path, target_size=(150, 150))
     img_array = tf.keras.preprocessing.image.img_to_array(img)

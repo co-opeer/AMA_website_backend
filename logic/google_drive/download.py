@@ -10,6 +10,7 @@ def get_id(url):
 
     # Пошук за допомогою регулярного виразу
     match = re.search(pattern, url)
+    print('try to get id')
 
     # Перевірка, чи було знайдено ID
     if match:
@@ -19,6 +20,7 @@ def get_id(url):
 
 
 def download_photo(url):
+    print("try to download photo")
     file_id = get_id(url)
     if not file_id:
         print("Error: Could not extract file ID from the URL.")
