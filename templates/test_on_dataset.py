@@ -1,11 +1,16 @@
 
 import os
 import tensorflow as tf
-
+from google_drive_downloader import GoogleDriveDownloader as gdd
 
 from keras_tuner.src.backend import keras
 
-model_path = os.path.join(os.path.dirname(__file__), 'saved_model_new.h5')
+model_path = os.path.join(os.path.dirname(__file__), 'saved_model.h5')
+
+if not os.path.exists(model_path):
+    gdd.download_file_from_google_drive(file_id='137uO_e5K0MpfGFwPPaOGVcpePBFe0XnA',
+                                        dest_path=model_path,
+                                        unzip=False)
 
 model = keras.models.load_model(model_path)
 
