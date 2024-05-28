@@ -2,8 +2,9 @@
 import os
 import tensorflow as tf
 from google_drive_downloader import GoogleDriveDownloader as gdd
-
+from PIL import Image
 from keras_tuner.src.backend import keras
+
 
 model_path = os.path.join(os.path.dirname(__file__), 'saved_model.h5')
 
